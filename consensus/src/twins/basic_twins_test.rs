@@ -69,7 +69,7 @@ fn basic_start_test() {
 /// Test:
 ///
 /// Run consensus for enough rounds to potentially form a commit.
-/// Check that n1 has no commits, and n0 has commits.
+/// Check that n2 has no commits, and n0 has commits.
 ///
 /// Run the test:
 /// cargo xtest -p consensus drop_config_test -- --nocapture
