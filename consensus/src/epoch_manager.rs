@@ -191,6 +191,7 @@ impl EpochManager {
                     self.author,
                     heuristic_config.active_weights,
                     heuristic_config.inactive_weights,
+                    heuristic_config.round_gap,
                 ));
                 Box::new(LeaderReputation::new(proposers, backend, heuristic))
             }

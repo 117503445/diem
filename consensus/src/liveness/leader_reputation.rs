@@ -102,14 +102,16 @@ pub struct ActiveInactiveHeuristic {
     author: Author,
     active_weight: u64,
     inactive_weight: u64,
+    round_gap: u64,
 }
 
 impl ActiveInactiveHeuristic {
-    pub fn new(author: Author, active_weight: u64, inactive_weight: u64) -> Self {
+    pub fn new(author: Author, active_weight: u64, inactive_weight: u64, round_gap: u64) -> Self {
         Self {
             author,
             active_weight,
             inactive_weight,
+            round_gap,
         }
     }
 }
@@ -179,7 +181,6 @@ impl LeaderReputation {
 
 impl ProposerElection for LeaderReputation {
     fn get_valid_proposer(&self, round: Round) -> Author {
-        // TODO: configure the round gap
         let target_round = if round >= 4 { round - 4 } else { 0 };
         let sliding_window = self.backend.get_block_metadata(target_round);
         let mut weights = self.heuristic.get_weights(&self.proposers, &sliding_window);

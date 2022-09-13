@@ -43,6 +43,7 @@ fn create_block(proposer: Author, voters: Vec<&ValidatorSigner>) -> NewBlockEven
 fn test_simple_heuristic() {
     let active_weight = 9;
     let inactive_weight = 1;
+    let round_gap = 4;
     let mut proposers = vec![];
     let mut signers = vec![];
     for i in 0..8 {
@@ -50,7 +51,8 @@ fn test_simple_heuristic() {
         proposers.push(signer.author());
         signers.push(signer);
     }
-    let heuristic = ActiveInactiveHeuristic::new(proposers[0], active_weight, inactive_weight);
+    let heuristic =
+        ActiveInactiveHeuristic::new(proposers[0], active_weight, inactive_weight, round_gap);
     // 1. Window size not enough
     let weights = heuristic.get_weights(&proposers, &[]);
     assert_eq!(weights.len(), proposers.len());
@@ -98,6 +100,7 @@ fn test_api() {
             proposers[0],
             active_weight,
             inactive_weight,
+            round_gap,
         )),
     );
     let round = 42u64;

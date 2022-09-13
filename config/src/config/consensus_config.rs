@@ -43,6 +43,7 @@ impl Default for ConsensusConfig {
             proposer_type: ConsensusProposerType::LeaderReputation(LeaderReputationConfig {
                 active_weights: 99,
                 inactive_weights: 1,
+                round_gap: 4,
             }),
             safety_rules: SafetyRulesConfig::default(),
             sync_only: false,
@@ -80,4 +81,5 @@ pub enum ConsensusProposerType {
 pub struct LeaderReputationConfig {
     pub active_weights: u64,
     pub inactive_weights: u64,
+    pub round_gap: u64,
 }
